@@ -4,11 +4,9 @@
 
 int main()
 {
-    setlocale(LC_ALL, "Russian");
+  setlocale(LC_ALL, "Russian");
 
-    UI* ui = new UI();
+  UI ui;
 
-    delete ui;
-
-    return 0;
+  return 0;
 }

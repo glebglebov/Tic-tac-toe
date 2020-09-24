@@ -2,9 +2,10 @@
 
 class GameField;
 
-class Game {
+class Game
+{
 
-	GameField* m_board;
+	GameField *m_board;
 
 	struct Move
 	{
@@ -17,9 +18,9 @@ public:
 
 	void gameStart();
 
-	void setBoard(GameField& board);
+	void setBoard(GameField &board);
 
-	bool checkWin(GameField& board, int player);
+	bool checkWin(GameField &board, int player);
 
 	void playerTurn();
 
@@ -27,6 +28,6 @@ public:
 
 	void gameUpdate(int player);
 
-	Move chooseTurn(GameField& board, int player);
+	Move chooseTurn(GameField &board, int player);
 
 };

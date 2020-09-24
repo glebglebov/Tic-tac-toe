@@ -1,6 +1,7 @@
 #pragma once
 
-class UI {
+class UI
+{
 	int game_size;
 
 	void mainMenu();
@@ -11,5 +12,4 @@ class UI {
 
 public:
 	UI();
-
 };

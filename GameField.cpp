@@ -1,13 +1,12 @@
-#include <windows.h>
+#include <iostream>
 
 #include "GameField.h"
 
-#include <iostream>
+#include <windows.h>
 #include <iomanip>
 
-using namespace std;
-
-GameField::GameField(int size) {
+GameField::GameField(int size)
+{
 	m_size = size;
 
 	for (int i = 0; i < size * size; i++) {
@@ -15,20 +14,24 @@ GameField::GameField(int size) {
 	}
 }
 
-int GameField::getSize() const {
+int GameField::getSize() const
+{
 	return m_size;
 }
 
-void GameField::set(int i, int player) {
+void GameField::set(int i, int player)
+{
 	field[i] = player;
 }
 
-void GameField::clean(int i) {
+void GameField::clean(int i)
+{
 	field[i] = 0;
 }
 
-vector<int> GameField::getAvailableField() {
-	vector<int> freeSpots;
+std::vector<int> GameField::getAvailableField()
+{
+	std::vector<int> freeSpots;
 
 	for (int i = 0; i < field.size(); i++) {
 		if (field[i] == 0)
@@ -38,7 +41,8 @@ vector<int> GameField::getAvailableField() {
 	return freeSpots;
 }
 
-bool GameField::isHasAvailable() {
+bool GameField::isHasAvailable()
+{
 	int n = getAvailableField().size();
 
 	if (n > 0)
@@ -47,11 +51,13 @@ bool GameField::isHasAvailable() {
 		return false;
 }
 
-bool GameField::isSpotAvailable(int i) {
+bool GameField::isSpotAvailable(int i)
+{
 	return field[i] == 0;
 }
 
-GameField& GameField::operator= (const GameField& gf) {
+GameField &GameField::operator= (const GameField &gf)
+{
 	if (this == &gf)
 		return *this;
 
@@ -61,28 +67,28 @@ GameField& GameField::operator= (const GameField& gf) {
 	return *this;
 }
 
-void GameField::fieldPrint() const {
+void GameField::fieldPrint() const
+{
 	HANDLE hConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	for (int i = 0; i < field.size(); i++) {
 		if (field[i] == -1) {
 			SetConsoleTextAttribute(hConsoleHandle, FOREGROUND_GREEN);
-			cout << setw(3) << "O" << " ";
+			std::cout << std::setw(3) << "O" << " ";
 		}
 		else if (field[i] == 1) {
 			SetConsoleTextAttribute(hConsoleHandle, FOREGROUND_RED);
-			cout << setw(3) << "X" << " ";
+			std::cout << std::setw(3) << "X" << " ";
 		}
 		else if (field[i] == 0) {
 			SetConsoleTextAttribute(hConsoleHandle, FOREGROUND_INTENSITY);
-			cout << setw(3) << "-" << " ";
+			std::cout << std::setw(3) << "-" << " ";
 		}
 
 		if ((i + 1) % m_size == 0 && i != 0)
-			cout << endl;
+			std::cout << std::endl;
 	}
-
-	cout << "\n" << endl;
+	std::cout << "\n" << std::endl;
 
 	SetConsoleTextAttribute(hConsoleHandle, 2);
 }

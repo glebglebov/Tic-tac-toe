@@ -3,49 +3,51 @@
 
 #include <iostream>
 
-using namespace std;
-
-Game::Game() {
+Game::Game()
+{
 	m_board = 0;
 }
 
-void Game::gameStart() {
+void Game::gameStart()
+{
 	if (m_board) {
 		m_board->fieldPrint();
 
-		cout << "Кидаем монетку..." << endl;
+		std::cout << "Кидаем монетку..." << std::endl;
 		int rnd = rand() % 100 + 1;
 
 		if (rnd > 50) {
-			cout << "Первым ходит бот!\n" << endl;
+			std::cout << "Первым ходит бот!\n" << std::endl;
 
 			int n = m_board->getSize();
 			int i = rand() % n + 0;
 
-			cout << "Ходит бот...\n" << endl;
+			std::cout << "Ходит бот...\n" << std::endl;
 
 			m_board->set(i, 1);
 			gameUpdate(1);
 		}
 		else {
-			cout << "Вы ходите первым!\n" << endl;
+			std::cout << "Вы ходите первым!\n" << std::endl;
 
 			playerTurn();
 		}
 	}
 	else {
-		cerr << "Нет игровой доски";
+		std::cerr << "Нет игровой доски";
 	}
 }
 
-void Game::setBoard(GameField& board) {
+void Game::setBoard(GameField &board)
+{
 	m_board = &board;
 }
 
-bool Game::checkWin(GameField& board, int player) {
+bool Game::checkWin(GameField &board, int player)
+{
 	int n = board.getSize();
 
-	vector<int> field = board.getField();
+	std::vector<int> field = board.getField();
 
 	bool res = false;
 
@@ -117,10 +119,11 @@ bool Game::checkWin(GameField& board, int player) {
 	return res;
 }
 
-Game::Move Game::chooseTurn(GameField& board, int player) {
+Game::Move Game::chooseTurn(GameField &board, int player)
+{
 	Move res;
 
-	vector<int> available = board.getAvailableField();
+	std::vector<int> available = board.getAvailableField();
 
 	if (available.size() > 8) {
 		int n = board.getSize();
@@ -145,13 +148,13 @@ Game::Move Game::chooseTurn(GameField& board, int player) {
 	}
 
 	Move move;
-	vector<Move> moves;
+	std::vector<Move> moves;
 
 	for (int i = 0; i < available.size(); i++) {
 		board.set(available[i], player);
 
 		move.index = available[i];
-		
+
 		if (player == 1) {
 			res = chooseTurn(board, -1);
 			move.score = res.score;
@@ -190,21 +193,22 @@ Game::Move Game::chooseTurn(GameField& board, int player) {
 	return moves[bestMove];
 }
 
-void Game::gameUpdate(int player) {
+void Game::gameUpdate(int player)
+{
 	m_board->fieldPrint();
 
 	if (checkWin(*m_board, player)) {
 		if (player == 1)
-			cout << "Вы проиграли!\n";
+			std::cout << "Вы проиграли!\n";
 		else if (player == -1)
-			cout << "Вы победили!\n";
+			std::cout << "Вы победили!\n";
 
-		cout << "\n" << endl;
+		std::cout << "\n" << std::endl;
 
 		return;
 	}
 	else if (!m_board->isHasAvailable()) {
-		cout << "Ничья.\n" << endl;
+		std::cout << "Ничья.\n" << std::endl;
 
 		return;
 	}
@@ -215,14 +219,15 @@ void Game::gameUpdate(int player) {
 		aiTurn();
 }
 
-void Game::playerTurn() {
+void Game::playerTurn()
+{
 	int x, y;
 
-	cout << "Ваш ход!\n"
+	std::cout << "Ваш ход!\n"
 		<< "Строка и столбец: ";
 
-	cin >> x >> y;
-	cout << endl;
+	std::cin >> x >> y;
+	std::cout << std::endl;
 
 	x -= 1;
 	y -= 1;
@@ -235,13 +240,14 @@ void Game::playerTurn() {
 
 	}
 	else {
-		cout << "Эта клетка уже занята!\n" << endl;
+		std::cout << "Эта клетка уже занята!\n" << std::endl;
 		playerTurn();
 	}
 }
 
-void Game::aiTurn() {
-	cout << "Ходит бот...\n" << endl;
+void Game::aiTurn()
+{
+	std::cout << "Ходит бот...\n" << std::endl;
 
 	GameField newBoard = *m_board;
 

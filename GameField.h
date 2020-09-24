@@ -2,18 +2,19 @@
 
 #include <vector>
 
-
-class GameField {
+class GameField
+{
 	int m_size;
 
 	std::vector<int> field;
 
 public:
 	GameField(int size = 3);
-	
+
 	int getSize() const;
 
-	std::vector<int> getField() const {
+	std::vector<int> getField() const
+	{
 		return field;
 	}
 
@@ -29,5 +30,5 @@ public:
 
 	void fieldPrint() const;
 
-	GameField& operator= (const GameField& gf);
+	GameField& operator= (const GameField &gf);
 };

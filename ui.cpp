@@ -5,9 +5,8 @@
 #include "Game.h"
 #include "GameField.h"
 
-using namespace std;
-
-UI::UI() {
+UI::UI()
+{
 	game_size = 3;
 
 	HANDLE hConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -16,22 +15,22 @@ UI::UI() {
 	mainMenu();
 }
 
-void UI::mainMenu() {
+void UI::mainMenu()
+{
 	int x = 0;
 
 	while (x != -1) {
-		cout << "---Добро пожаловать в Крестики-Нолики!---\n\n"
+		std::cout << "---Добро пожаловать в Крестики-Нолики!---\n\n"
 			<< "\t1. [Начать новую игру]\n"
 			<< "\t2. [Настройки игры]\n"
 			<< "\t3. [Выйти из игры]\n\n"
 			<< "Введите действие: ";
 
-		cin >> x;
-		cout << endl;
+		std::cin >> x;
+		std::cout << std::endl;
 
 		if (x == 1) {
 			newGame();
-
 		}
 		else if (x == 2) {
 			options();
@@ -41,44 +40,42 @@ void UI::mainMenu() {
 			break;
 		}
 	}
-
 }
 
-void UI::newGame() {
-	cout << "\n\n________________________\n\n" << endl;
+void UI::newGame()
+{
+	std::cout << "\n\n________________________\n\n" << std::endl;
 
 	Game game;
-
 	GameField board(game_size);
-
 	game.setBoard(board);
 
-	cout << "Игра начинается!\n" << endl;
+	std::cout << "Игра начинается!\n" << std::endl;
 
 	game.gameStart();
-
 }
 
-void UI::options() {
+void UI::options()
+{
 	int x = 0;
 
-	cout << "---Настройки игры---\n\n"
+	std::cout << "---Настройки игры---\n\n"
 		<< "\t1. [Изменить размер поля]\n\n"
 		<< "Введите действие: ";
 
-	cin >> x;
-	cout << endl;
+	std::cin >> x;
+	std::cout << std::endl;
 
 	if (x == 1) {
-		int y = 0; 
+		int y = 0;
 
-		cout << "Введите новый размер игрового поля.\n"
-			<< "(От 3 до 9)\n"
+		std::cout << "Введите новый размер игрового поля.\n"
+			<< "(от 3 до 9)\n"
 			<< "Текущий размер: " << game_size << "\n"
 			<< "Ввод: ";
 
-		cin >> y;
-		cout << endl;
+		std::cin >> y;
+		std::cout << std::endl;
 
 		if (y >= 3 && y <= 9) {
 			if (y != game_size)
